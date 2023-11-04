@@ -40,15 +40,18 @@ def heuristic(cell1, cell2):
 
 def find_path(start, goal, non_existent_cells, flag):
     if flag == 0:
-        if goal.has_item:
-            return None
-        else:
+        if goal.has_item == False and start.has_item == True:
             print("Путь может быть найден, можно положить предмет в эту ячейку")
-    elif flag == 1:
-        if not goal.has_item:
-            return None
+
         else:
+            print("Ошибка, нельзя положить предмет в ячейку")
+            return None
+    elif flag == 1:
+        if goal.has_item == True and start.has_item == False:
             print("Путь может быть найден, можно забрать предмет из ячейки")
+        else:
+            print("Ошибка, нельзя забрать предмет из ячейки")
+            return None
 
     if start in non_existent_cells or goal in non_existent_cells:
         return None
@@ -95,11 +98,11 @@ def find_path(start, goal, non_existent_cells, flag):
 
 # все ячейки шкафа
 cell_list = [
-    Cell(0, 0, True), Cell(0, 1, False), Cell(0, 2, False), Cell(0, 3, False), Cell(0, 4, True),
+    Cell(0, 0, True), Cell(0, 1, False), Cell(0, 2, True), Cell(0, 3, False), Cell(0, 4, True),
     Cell(1, 0, False), Cell(1, 1, False), Cell(1, 2, False), Cell(1, 3, False), Cell(1, 4, False),
     Cell(2, 0, False), Cell(2, 1, False), Cell(2, 2, False), Cell(2, 3, False), Cell(2, 4, False),
     Cell(3, 0, False), Cell(3, 1, False), Cell(3, 2, False), Cell(3, 3, False), Cell(3, 4, False),
-    Cell(4, 0, False), Cell(4, 1, False), Cell(4, 2, False), Cell(4, 3, False), Cell(4, 4, True)
+    Cell(4, 0, False), Cell(4, 1, False), Cell(4, 2, False), Cell(4, 3, False), Cell(4, 4, False)
 ]
 
 # список несуществующих ячеек, чтобы выделить приёмку
@@ -112,7 +115,9 @@ try:
     print(f"Приёмка: {start.x}, {start.y}, {start.has_item}")
     print(f"Целевая точка: {goal.x}, {goal.y}, {goal.has_item}")
 
-    path = find_path(start, goal, non_existent_cells, 1)
+    # флаг 0 - положить предмет в ячейку
+    # флаг 1 - надо взять предмет из ячейки
+    path = find_path(start, goal, non_existent_cells, 0)
 
     if path is None:
         print("Путь не может быть найден.")
