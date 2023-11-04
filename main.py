@@ -42,13 +42,16 @@ def find_path(start, goal, non_existent_cells, flag):
     if flag == 0:
         if goal.has_item == False and start.has_item == True:
             print("Путь может быть найден, можно положить предмет в эту ячейку")
-
+        elif (goal.x and goal.y) == (start.x and start.y):
+            print("Ошибка, нельзя положить предмет из себя в себя")
         else:
             print("Ошибка, нельзя положить предмет в ячейку")
             return None
     elif flag == 1:
         if goal.has_item == True and start.has_item == False:
             print("Путь может быть найден, можно забрать предмет из ячейки")
+        elif (goal.x and goal.y) == (start.x and start.y):
+            print("Ошибка, нельзя взять предмет из себя чтобы принести себе")
         else:
             print("Ошибка, нельзя забрать предмет из ячейки")
             return None
@@ -125,7 +128,7 @@ try:
         pathway = [(cell.x, cell.y) for cell in path]
         print("Найденный путь:", pathway)
 
-    # Пример смены флага has_item у ячейкм
+    # Пример смены флага has_item у ячейки
     cell_list[0].toggle_item()
     print(cell_list[0].has_item)
     cell_list[0].toggle_item()
