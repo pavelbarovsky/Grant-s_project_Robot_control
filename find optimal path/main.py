@@ -44,6 +44,7 @@ def find_path(start, goal, non_existent_cells, flag):
             print("Путь может быть найден, можно положить предмет в эту ячейку")
         elif (goal.x and goal.y) == (start.x and start.y):
             print("Ошибка, нельзя положить предмет из себя в себя")
+            return None
         else:
             print("Ошибка, нельзя положить предмет в ячейку")
             return None
@@ -52,6 +53,7 @@ def find_path(start, goal, non_existent_cells, flag):
             print("Путь может быть найден, можно забрать предмет из ячейки")
         elif (goal.x and goal.y) == (start.x and start.y):
             print("Ошибка, нельзя взять предмет из себя чтобы принести себе")
+            return None
         else:
             print("Ошибка, нельзя забрать предмет из ячейки")
             return None
@@ -113,7 +115,7 @@ non_existent_cells = [cell_list[0], cell_list[1], cell_list[3], cell_list[4]]
 
 try:
     start = cell_list[2]
-    goal = cell_list[24]
+    goal = cell_list[2]
 
     print(f"Приёмка: {start.x}, {start.y}, {start.has_item}")
     print(f"Целевая точка: {goal.x}, {goal.y}, {goal.has_item}")
